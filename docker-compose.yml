@@ -35,7 +35,7 @@ services:
       BOX_INSTALL: "true"
       # Set this to true the first time you run the containter to Run the Intaller module
       # After installation restart the container with this directive set to "false"
-      INSTALL: "false"
+      INSTALL: "true"
       # Database Connection
       DB_CONNECTION_STRING: "jdbc:mysql://db:3306/contentbox?useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=true"
       DB_CLASS: "com.mysql.jdbc.Driver"
