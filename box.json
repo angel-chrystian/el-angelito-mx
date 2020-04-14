@@ -1,0 +1,15 @@
+{
+    "name":"El Angelito MX Site",
+    "version":"1.0.0",
+    "author":"Angel Chrystian Torres",
+    "dependencies":{
+        "contentbox":"~4.2.1",
+        "coldbox":"5.3.0"
+    },
+    "devDependencies":{},
+    "installPaths":{
+        "contentbox":"modules/contentbox/",
+        "coldbox":"coldbox/"
+    },
+    "scripts":{}
+}

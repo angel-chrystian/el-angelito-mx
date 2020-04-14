@@ -1,0 +1,54 @@
+# ${WEBAPP_STORAGE_HOME} Is an environment variable used in Azure that is the path to the
+# persistent folder in the Application
+version: "3"
+
+networks: 
+  webnet:
+
+services:
+
+  # Database
+  db:
+    image: mysql:5.7
+    container_name: "cb_database"
+    environment:
+      MYSQL_ROOT_PASSWORD: contentbox
+      MYSQL_DATABASE: contentbox
+      MYSQL_USER: contentbox
+      MYSQL_PASSWORD: contentbox
+    ports:
+      - "3307:3306"
+    volumes:
+      - ${WEBAPP_STORAGE_HOME}/data:/var/lib/mysql
+    networks: 
+      - webnet
+    
+  # ContentBox Site
+  contentbox:
+    depends_on:
+      - db
+    image: elangel/elangelitomx:latest
+    container_name: "cb_site"
+    # Environment Variables
+    environment:
+      cfconfig_adminPassword: contentbox
+      BOX_INSTALL: "true"
+      # Set this to true the first time you run the containter to Run the Intaller module
+      # After installation restart the container with this directive set to "false"
+      INSTALL: "false"
+      # Database Connection
+      DB_CONNECTION_STRING: "jdbc:mysql://db:3306/contentbox?useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=true"
+      DB_CLASS: "com.mysql.jdbc.Driver"
+      DB_USER: "contentbox" 
+      DB_PASSWORD: "contentbox"
+    # Ports
+    ports:
+      - "8085:8080"
+    # Data & Overrides
+    volumes:
+      # Persist Media Manager
+      - ${WEBAPP_STORAGE_HOME}/build/docker/contentbox-content:/app/includes/shared/media
+      # Uncomment the next line in Development environment
+      #- ${WEBAPP_STORAGE_HOME}/app/modules_app:/app/modules_app
+    networks: 
+      - webnet

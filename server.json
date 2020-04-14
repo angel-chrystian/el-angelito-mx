@@ -1,0 +1,11 @@
+{
+  "name": "ElAngelitoMX",
+  "startTimeout": 240,
+  "stopsocket": 50123,
+  "debug": true,
+  "trace": true,
+  "console": true,    
+  "web": {
+      "host": "elangelitomx.localtest.me"
+  }
+}
